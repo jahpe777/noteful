@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-// import './Note.css';
+import './notePage.css';
+// import DUMMY from './dummyStore/dummyStore'
 
 class NotePage extends Component {
   
@@ -11,6 +12,7 @@ class NotePage extends Component {
           <button className='go-back-button'>
             Go Back
           </button>
+          {/* <h3>{note.name}</h3> */}
           <button className='delete-button'>
             Delete
           </button>

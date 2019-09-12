@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-// import './noteSideBar.css';
+import './noteSideBar.css';
+// import DUMMY from './dummyStore/dummyStore'
 
 class NoteSideBar extends Component {
   

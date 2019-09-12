@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import NotePage from './notePage/notePage';
-import SideBar from './sideBar/sideBar';
 import NoteList from './noteList/noteList';
+import SideBar from './sideBar/sideBar';
+import NotePage from './notePage/notePage';
 import NoteSideBar from './noteSideBar/noteSideBar';
 import './App.css';
 
