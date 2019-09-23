@@ -1,85 +1,61 @@
-import React, {Component} from 'react';
-import { withRouter } from "react-router-dom"
-import ApiContext from '../ApiContext';
+import React, { Component } from 'react'
+import NotefulForm from '../NotefulForm/NotefulForm'
+import ApiContext from '../ApiContext'
 import config from '../config'
 import './AddFolder.css'
 
-class AddFolder extends Component {
-  static defaultProps ={
-    addFolder: () => {},
+export default class AddFolder extends Component {
+  static defaultProps = {
+    history: {
+      push: () => { }
+    },
   }
-
   static contextType = ApiContext;
 
-  constructor() {
-    super();
-    this.state = {
-        folderName: '',
-    }
-    this.handleFolder = this.handleFolder.bind(this)
-}
-
-  setFolderName(event) {
-    this.setState({
-      folderName:event.target.value
-    })
-  }
-
-  handleFolder = e => {
+  handleSubmit = e => {
     e.preventDefault()
-
-    let folderId = this.state.folderName
-
-    if (!this.state.folderName || this.state.folderName.trim() == '') { 
-      alert('name is required') 
-      return 
+    const folder = {
+      name: e.target['folder-name'].value
     }
-    
-    let body = {
-      name: this.state.folderName,
-    }
-
     fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(folder),
     })
       .then(res => {
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(() => {
-        this.context.addFolder(folderId)
-        this.props.addFolder(folderId)
-        this.props.history.push("/")
-        window.location.reload();
+      .then(folder => {
+        this.context.addFolder(folder)
+        this.props.history.push(`/folder/${folder.id}`)
       })
       .catch(error => {
         console.error({ error })
       })
   }
 
-  render () {
+  render() {
     return (
-     <form className="addFolderForm" onSubmit={this.handleFolder}>
-       <h2>Add Folder</h2>
-       <div className="form">
-         <label htmlFor="name">New Folder Name: </label>
-         <input type="text" className="newFolderInput"
-           name="name" id="name" onChange={(e) => this.setFolderName(e)} required/>
-       </div>
-
-       <div className="AddFolder__button-group">
-        <button type="submit" className="AddFolder__submit-button">
-            Submit
-        </button>
-       </div>
-     </form>
-   )
- }
+      <section className='AddFolder'>
+        <h2>Create a folder</h2>
+        <NotefulForm onSubmit={this.handleSubmit}>
+          <div className='field'>
+            <label htmlFor='folder-name-input'>
+              Name
+            </label>
+            <input type='text' id='folder-name-input' name='folder-name' />
+          </div>
+          <div className='buttons'>
+            <button type='submit'>
+              Add folder
+            </button>
+          </div>
+        </NotefulForm>
+      </section>
+    )
+  }
 }
-
-export default withRouter(AddFolder);

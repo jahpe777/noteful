@@ -5,6 +5,8 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
 import config from '../config'
 import './App.css';
@@ -79,15 +81,33 @@ renderMainRoutes() {
         />
       ))}
       <Route path='/note/:noteId' component={NotePageMain} />
+      <Route path='/add-folder' component={AddFolder} />
+      <Route path='/add-note' component={AddNote} />
     </>
   );
 }
+
+addNote = newNote => {
+  console.log(this.state.notes)
+  console.log(newNote)
+  this.setState({
+      notes: this.state.notes.concat(newNote)
+  }
+)}
+
+addFolder = newFolder => {
+  this.setState({
+      folders: this.state.folders.concat(newFolder)
+  }
+)}
 
 render() {
   const value = {
     notes: this.state.notes,
     folders: this.state.folders,
-    deleteNote: this.handleDeleteNote
+    deleteNote: this.handleDeleteNote,
+    addNote: this.addNote,
+    addFolder: this.addFolder
   };
   return (
     <ApiContext.Provider value={value}>
