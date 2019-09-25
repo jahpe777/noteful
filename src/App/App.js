@@ -8,6 +8,8 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
+import MainError from '../ErrorBoundaries/MainError';
+import NavError from '../ErrorBoundaries/NavError';
 import config from '../config'
 import './App.css';
 
@@ -53,7 +55,7 @@ class App extends Component {
 
   renderNavRoutes() {
       return (
-        <>
+        <NavError>
           {['/', '/folder/:folderId'].map(path => (
             <Route 
               exact
@@ -65,13 +67,13 @@ class App extends Component {
         <Route path='/note/:noteId' component={NotePageNav} />
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
-    </>
+    </NavError>
   );
 }
 
 renderMainRoutes() {
   return (
-    <>
+    <MainError>
       {['/', '/folder/:folderId'].map(path => (
         <Route
           exact 
@@ -83,7 +85,7 @@ renderMainRoutes() {
       <Route path='/note/:noteId' component={NotePageMain} />
       <Route path='/add-folder' component={AddFolder} />
       <Route path='/add-note' component={AddNote} />
-    </>
+    </MainError>
   );
 }
 

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ApiContext from '../ApiContext';
 import config from '../config'
+import PropTypes from 'prop-types';
 import './Note.css'
 
-export default class Note extends React.Component {
+export default class Note extends Component {
     static defaultProps = {
         onDeleteNote: () => {},
     }
@@ -16,7 +17,7 @@ export default class Note extends React.Component {
         e.preventDefault()
         const noteId = this.props.id
 
-    fetch(`${config.API_EDNPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
@@ -68,3 +69,7 @@ export default class Note extends React.Component {
             )
         }
     };
+
+    Note.propTypes = {
+        match: PropTypes.object.isRequired
+    }

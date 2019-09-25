@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Note from '../Note/Note';
 import CircleButton from '../CircleButton/CircleButton';
 import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
+import PropTypes from 'prop-types';
 import './NoteListMain.css';
 
-export default class NoteListMain extends React.Component {
+export default class NoteListMain extends Component {
     static defaultProps = {
         match: {
             params: {}
@@ -48,3 +49,7 @@ export default class NoteListMain extends React.Component {
         )
     }
 };
+
+NoteListMain.propTypes = {
+    match: PropTypes.object.isRequired
+}
