@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import ApiContext from '../ApiContext'
 import config from '../config'
+import PropTypes from 'prop-types';
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -81,4 +82,8 @@ export default class AddNote extends Component {
       </section>
     )
   }
+}
+
+AddNote.propTypes = {
+  history: PropTypes.object.isRequired
 }

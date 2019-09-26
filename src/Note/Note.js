@@ -71,5 +71,7 @@ export default class Note extends Component {
     };
 
     Note.propTypes = {
-        match: PropTypes.object.isRequired
+        id: PropTypes.string.isRequired
     }
+
+   

@@ -26,5 +26,5 @@ class NavError extends Component {
 export default NavError;
 
 NavError.propTypes = {
-  match: PropTypes.object.isRequired
+  children: PropTypes.array.isRequired
 }

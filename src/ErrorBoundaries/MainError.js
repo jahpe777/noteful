@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class MainError extends Component {
   constructor(props) {
@@ -23,3 +24,7 @@ class MainError extends Component {
 };
 
 export default MainError;
+
+MainError.propTypes = {
+  children: PropTypes.array.isRequired
+}
