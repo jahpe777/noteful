@@ -57,11 +57,9 @@ export default class Note extends Component {
                     remove
                 </button>
                 <div className='Note__dates'>
-                    <div className='Note__dates-modified'>
-                        Modified
-                        {''}
+                    <div className='Note__dates-modified'>Modified {''}
                         <span className='Date'>
-                        {format(new Date(modified), 'Do MMM yyyy')}
+                        {format(new Date(modified), 'do MMM yyyy')}
                         </span>
                     </div>
                 </div>
