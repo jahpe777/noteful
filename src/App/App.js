@@ -16,8 +16,71 @@ import './App.css';
 class App extends Component {
   state = { 
     notes: [], 
-    folders: [] 
+    folders: [],
   };
+
+  addFolder = newFolder => {
+    return fetch(`${config.API_ENDPOINT}/folders`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(newFolder)
+    })
+    .then(res => {
+      if (!res.ok)
+        return res.json().then(e => Promise.reject(e))
+      return res.json()
+    })
+    .then(createdFolder => {
+      this.setState({
+        folders: this.state.folders.concat(createdFolder)
+      });
+      return createdFolder
+    });
+  }
+
+  addNote = newNote => {
+    return fetch(`${config.API_ENDPOINT}/notes`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(newNote)
+    })
+    .then(res => {
+      if (!res.ok)
+        return res.json().then(e => Promise.reject(e))
+      return res.json()
+    })
+    .then(createdNote => {
+      this.setState({
+        notes: this.state.notes.concat(createdNote)
+      });
+      return createdNote
+    });
+  }
+
+  handleDeleteNote = noteId => {
+    return fetch(`${config.API_ENDPOINT}/notes`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE',
+      body: JSON.stringify(noteId)
+    })
+    .then (res => {
+      if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+      return res.json()
+  })
+    .then(deletedNote => {
+      this.setState({
+        notes: this.state.notes.filter(note => note.id !== noteId)
+    });
+    return deletedNote
+  });
+}
 
   //run api calls within componentDidMount
   componentDidMount() {
@@ -46,12 +109,6 @@ class App extends Component {
         console.error({error});
       });
   }
-
-  handleDeleteNote = noteId => {
-    this.setState({
-      notes: this.state.notes.filter(note => note.id !== noteId)
-    });
-  };
 
   renderNavRoutes() {
       return (
@@ -88,20 +145,6 @@ renderMainRoutes() {
     </MainError>
   );
 }
-
-addNote = newNote => {
-  console.log(this.state.notes)
-  console.log(newNote)
-  this.setState({
-      notes: this.state.notes.concat(newNote)
-  }
-)}
-
-addFolder = newFolder => {
-  this.setState({
-      folders: this.state.folders.concat(newFolder)
-  }
-)}
 
 render() {
   const value = {
