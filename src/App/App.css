@@ -37,3 +37,7 @@
   height: calc(100vh - 120px);
   overflow: auto;
 }
+
+i.fas {
+  margin: 0 10px;
+}

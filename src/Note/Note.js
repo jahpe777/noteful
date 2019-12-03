@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ApiContext from '../ApiContext';
 import PropTypes from 'prop-types';
 import './Note.css'
@@ -35,14 +34,14 @@ export default class Note extends Component {
                     type='button'
                     onClick={this.handleClickDelete}
                 >
-                    <FontAwesomeIcon icon='trash-alt' />
+                    <i className='fas fa-trash-alt'></i>
                     {''}
                     remove
                 </button>
                 <div className='Note__dates'>
                     <div className='Note__dates-modified'>Modified {''}
                         <span className='Date'>
-                        {format(new Date(modified), 'do MMM yyyy')}
+                        {format(new Date(modified), 'do MMM YYYY')}
                         </span>
                     </div>
                 </div>
@@ -51,8 +50,5 @@ export default class Note extends Component {
         }
     };
 
-    Note.propTypes = {
-        id: PropTypes.string.isRequired
-    }
 
    

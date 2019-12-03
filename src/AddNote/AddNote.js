@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import ApiContext from '../ApiContext'
-import config from '../config'
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import './AddNote.css'
 
 export default class AddNote extends Component {

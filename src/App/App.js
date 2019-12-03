@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
@@ -62,7 +61,7 @@ class App extends Component {
   }
 
   handleDeleteNote = noteId => {
-    return fetch(`${config.API_ENDPOINT}/notes`, {
+    return fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -72,14 +71,13 @@ class App extends Component {
     .then (res => {
       if (!res.ok)
           return res.json().then(e => Promise.reject(e))
-      return res.json()
-  })
+      return true
+    })
     .then(deletedNote => {
       this.setState({
         notes: this.state.notes.filter(note => note.id !== noteId)
+      });
     });
-    return deletedNote
-  });
 }
 
   //run api calls within componentDidMount
@@ -161,7 +159,7 @@ render() {
         <header className='App__header'>
           <h1>
             <Link to='/'>Noteful</Link>{''}
-            <FontAwesomeIcon icon='check-double' />
+            <i className='fas fa-check-double'></i>
           </h1>
         </header>
         <main className='App_main'>{this.renderMainRoutes()}</main>

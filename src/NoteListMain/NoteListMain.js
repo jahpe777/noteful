@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Note from '../Note/Note';
 import CircleButton from '../CircleButton/CircleButton';
 import ApiContext from '../ApiContext'
@@ -40,7 +39,7 @@ export default class NoteListMain extends Component {
                             type='button'
                             className='NoteListMain__add-note-button'
                             >
-                            <FontAwesomeIcon icon='plus' />
+                            <i className='fas fa-plus'></i>
                             <br />
                             Note
                             </CircleButton>
